@@ -17,7 +17,7 @@
                     <option value="">— Pilih Nasabah —</option>
                     @foreach ($nasabah as $n)
                         <option value="{{ $n->id }}" data-saldo="{{ $n->saldo }}">
-                            {{ $n->kode }} — {{ $n->nama }} (Saldo: {{ formatRupiah($n->saldo) }})
+                            {{ $n->kode }} — {{ $n->nama }} (Saldo: {{ formatRupiah($n->saldo) }}) [{{ $n->status }}]
                         </option>
                     @endforeach
                 </select>

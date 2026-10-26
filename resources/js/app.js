@@ -48,7 +48,7 @@ function initSidebar() {
 
   if (!sidebar || !toggleBtn) return;
 
-  const isMobile = () => window.innerWidth <= 768;
+  const isMobile = () => window.innerWidth <= 992;
 
   if (!isMobile() && localStorage.getItem('sidebarCollapsed') === 'true') {
     sidebar.classList.add('collapsed');
@@ -72,6 +72,16 @@ function initSidebar() {
       overlay.classList.remove('show');
     });
   }
+
+  // Tutup sidebar otomatis saat menu diklik di perangkat mobile
+  document.querySelectorAll('.sidebar-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (isMobile()) {
+        sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('show');
+      }
+    });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {

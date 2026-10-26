@@ -38,7 +38,8 @@ class PenarikanController extends Controller
 
     public function create()
     {
-        $nasabah = Nasabah::aktif()->where('saldo', '>', 0)->orderBy('nama')->get();
+        Nasabah::perbaruiStatusJikaPerlu();
+        $nasabah = Nasabah::where('saldo', '>', 0)->orderBy('nama')->get();
         return view('penarikan.create', compact('nasabah'));
     }
 

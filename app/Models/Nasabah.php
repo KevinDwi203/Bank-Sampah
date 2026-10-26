@@ -56,23 +56,25 @@ class Nasabah extends Model
     {
         $lastDeposit = $this->transaksiSelesai()->latest('tanggal')->first();
 
-        if ($lastDeposit) {
+        if ($lastDeposit && $lastDeposit->tanggal) {
             $this->last_deposit_at = $lastDeposit->tanggal;
-            $this->status = $lastDeposit->tanggal >= now()->subMonth() ? 'Aktif' : 'Tidak Aktif';
+            $tanggalDeposit = \Carbon\Carbon::parse($lastDeposit->tanggal)->startOfDay();
+            $batasAktif = now()->subMonth()->startOfDay();
+            $this->status = $tanggalDeposit->greaterThanOrEqualTo($batasAktif) ? 'Aktif' : 'Tidak Aktif';
         } else {
-            $this->status = $this->created_at < now()->subMonth() ? 'Tidak Aktif' : 'Aktif';
+            $this->status = 'Tidak Aktif';
             $this->last_deposit_at = null;
         }
         $this->save();
     }
 
-    public static function perbaruiStatusJikaPerlu(): void
+    public static function perbaruiStatusJikaPerlu(bool $force = false): void
     {
-        if (! \Illuminate\Support\Facades\Cache::add('nasabah_status_diperbarui', true, now()->addHours(6))) {
+        if (! $force && ! \Illuminate\Support\Facades\Cache::add('nasabah_status_diperbarui', true, now()->addMinutes(15))) {
             return;
         }
 
-        static::query()->get()->each->updateStatusOtomatis();
+        static::with('transaksiSelesai')->get()->each->updateStatusOtomatis();
     }
 
     public function scopeAktif($query)

@@ -41,6 +41,48 @@ class UserSeeder extends Seeder
                 ]
             );
         }
+
+        $nasabahAccounts = [
+            ['card' => '01', 'nama' => 'Ibu Lilis', 'username' => 'nk01', 'password' => 'QnUAA5IH'],
+            ['card' => '02', 'nama' => 'Bu Aep', 'username' => 'nk02', 'password' => 'xgtiNfL7'],
+            ['card' => '03', 'nama' => 'Wa Deden', 'username' => 'nk03', 'password' => '0R9bPXic'],
+            ['card' => '04', 'nama' => 'Bu Ahmad', 'username' => 'nk04', 'password' => 'gRvBXDsi'],
+            ['card' => '05', 'nama' => 'Pak Iwan Dermawan', 'username' => 'nk05', 'password' => 'ydderAey'],
+            ['card' => '06', 'nama' => 'Iwan Nirwana', 'username' => 'nk06', 'password' => 'tob3bt90'],
+            ['card' => '07', 'nama' => 'Gilang N', 'username' => 'nk07', 'password' => '5x4ZMH16'],
+            ['card' => '08', 'nama' => 'Pak Martin', 'username' => 'nk08', 'password' => 'lYxLf6Od'],
+            ['card' => '09', 'nama' => 'Teh Meli', 'username' => 'nk09', 'password' => '8m4zVERo'],
+            ['card' => '10', 'nama' => 'Bu Soemantri', 'username' => 'nk10', 'password' => 'oZ77oEgj'],
+            ['card' => '11', 'nama' => 'Pak Heru', 'username' => 'nk11', 'password' => 'hFL5Qr2e'],
+            ['card' => '12', 'nama' => 'Kaka Ica', 'username' => 'nk12', 'password' => 'ewb4gYuA'],
+            ['card' => '13', 'nama' => 'Bunda/Mamah Meimei', 'username' => 'nk13', 'password' => 'hMyapFc5'],
+            ['card' => '14', 'nama' => 'Bu Momor', 'username' => 'nk14', 'password' => 'htQLPlVG'],
+            ['card' => '15', 'nama' => 'Pak Adang', 'username' => 'nk15', 'password' => 'kk6NeiLa'],
+            ['card' => '16', 'nama' => 'Mang Ade', 'username' => 'nk16', 'password' => 'ZeVU309u'],
+            ['card' => '17', 'nama' => 'Bu Hjh. Endang', 'username' => 'nk17', 'password' => 'paLVbA7M'],
+            ['card' => '18', 'nama' => 'Pak Deden', 'username' => 'nk18', 'password' => '6q4pCTzh'],
+            ['card' => '19', 'nama' => 'Bu Yuda', 'username' => 'nk19', 'password' => 'KA3xs4LO'],
+            ['card' => '20', 'nama' => 'Mamah Kekey', 'username' => 'nk20', 'password' => 'pCt5JKcZ'],
+            ['card' => '21', 'nama' => 'Bu Eko', 'username' => 'nk21', 'password' => 'kaAevyOV'],
+            ['card' => '22', 'nama' => 'Bu Dede GH', 'username' => 'nk22', 'password' => 'ynQOcvqV'],
+        ];
+
+        foreach ($nasabahAccounts as $acc) {
+            $nasabah = Nasabah::where('nomor_kartu', $acc['card'])
+                ->orWhere('kode', 'like', "%{$acc['card']}")
+                ->first();
+
+            User::updateOrCreate(
+                ['username' => $acc['username']],
+                [
+                    'nama' => $acc['nama'],
+                    'role' => 'Nasabah',
+                    'password' => $acc['password'],
+                    'aktif' => true,
+                    'nasabah_id' => $nasabah?->id,
+                ]
+            );
+        }
     }
 }
 

@@ -61,6 +61,7 @@ class TransaksiController extends Controller
 
     public function create()
     {
+        Nasabah::perbaruiStatusJikaPerlu();
         $nasabah = Nasabah::orderBy('nama')->get();
         $jenisSampah = JenisSampah::aktif()->orderBy('kategori')->orderBy('nama')->get();
 

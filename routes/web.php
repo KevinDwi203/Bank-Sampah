@@ -18,12 +18,13 @@ use App\Http\Controllers\AkunSayaController;
 Route::get('/run-migrate-setup', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
         \Illuminate\Support\Facades\Artisan::call('banksampah:import-csv', [
             'folder' => database_path('import'),
             '--replace-demo-data' => true,
             '--force' => true,
         ]);
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        \App\Models\Nasabah::perbaruiStatusJikaPerlu(true);
         $output = \Illuminate\Support\Facades\Artisan::output();
 
         return '<div style="font-family:sans-serif;padding:30px;max-width:650px;margin:30px auto;border:1px solid #10b981;border-radius:12px;background:#f0fdf4;">

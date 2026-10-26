@@ -74,6 +74,9 @@ class ImportBankSampahCsv extends Command
                 $this->importCustomers($customers);
                 $this->importTransactions($transactions);
                 $this->importCash($cashRows);
+
+                // Perbarui status keaktifan nasabah berdasarkan transaksi yang baru diimpor
+                \App\Models\Nasabah::with('transaksiSelesai')->get()->each->updateStatusOtomatis();
             }, 3);
 
             $this->newLine();
