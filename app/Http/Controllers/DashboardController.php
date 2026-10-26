@@ -12,6 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        Nasabah::perbaruiStatusJikaPerlu();
         $stats = $this->getDashboardStats();
         $grafikBulanan = $this->getGrafikBulanan();
         $komposisiJenis = $this->getKomposisiJenis();

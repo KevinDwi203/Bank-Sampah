@@ -66,6 +66,15 @@ class Nasabah extends Model
         $this->save();
     }
 
+    public static function perbaruiStatusJikaPerlu(): void
+    {
+        if (! \Illuminate\Support\Facades\Cache::add('nasabah_status_diperbarui', true, now()->addHours(6))) {
+            return;
+        }
+
+        static::query()->get()->each->updateStatusOtomatis();
+    }
+
     public function scopeAktif($query)
     {
         return $query->where('status', 'Aktif');

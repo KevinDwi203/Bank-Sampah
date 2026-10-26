@@ -13,6 +13,7 @@ class NasabahController extends Controller
 {
     public function index(Request $request)
     {
+        Nasabah::perbaruiStatusJikaPerlu();
         $query = Nasabah::query();
 
         if ($request->filled('q')) {
