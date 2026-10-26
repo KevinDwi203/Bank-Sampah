@@ -1,0 +1,392 @@
+/* ===================================
+   SIDEBAR COLLAPSIBLE STYLES
+   =================================== */
+
+.sidebar {
+  transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 72px;
+}
+
+.sidebar.collapsed .sidebar-logo .logo-text,
+.sidebar.collapsed .sidebar-user .user-info,
+.sidebar.collapsed .nav-item a span:not(.nav-icon),
+.sidebar.collapsed .nav-section-title,
+.sidebar.collapsed .sidebar-footer a span {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-logo {
+  justify-content: center;
+  padding: 20px 12px;
+}
+
+.sidebar.collapsed .sidebar-user {
+  justify-content: center;
+  padding: 16px 12px;
+}
+
+.sidebar.collapsed .nav-item {
+  margin: 2px 8px;
+}
+
+.sidebar.collapsed .nav-item a {
+  justify-content: center;
+  padding: 12px;
+}
+
+.sidebar.collapsed .sidebar-footer {
+  padding: 16px 8px;
+}
+
+.sidebar.collapsed .sidebar-footer a {
+  justify-content: center;
+  padding: 10px;
+}
+
+/* Main content adjustment */
+.main-content {
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+  margin-left: 72px;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 101;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar.collapsed {
+    width: 280px;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.collapsed.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .main-content.expanded {
+    margin-left: 0;
+  }
+
+  .sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar-overlay.show {
+    display: block;
+  }
+}
+
+/* Table pagination for Laravel */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.pagination .pagination-info {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.pagination .pagination-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.pagination .page-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 6px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Poppins', sans-serif;
+}
+
+.pagination .page-btn:hover,
+.pagination .page-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* Laravel pagination links */
+.pagination a.page-btn {
+  text-decoration: none;
+}
+
+.pagination span.page-btn {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* Form error text */
+.error-text {
+  display: block;
+  color: var(--danger);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* Input focus improvements */
+.form-control:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+/* File input styling */
+input[type="file"].form-control {
+  padding: 8px 16px;
+}
+
+/* Image preview */
+img[style*="max-height"] {
+  border-radius: 8px;
+}
+
+/* Textarea resize */
+textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Select styling */
+select.form-control {
+  cursor: pointer;
+}
+
+/* Checkbox wrapper */
+.checkbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.checkbox-wrap input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Modal responsive */
+@media (max-width: 500px) {
+  .modal {
+    width: 95vw !important;
+    padding: 20px 16px !important;
+    margin: 12px !important;
+  }
+  
+  .modal-footer {
+    flex-direction: column-reverse;
+  }
+  
+  .modal-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Table responsive adjustments */
+@media (max-width: 768px) {
+  .table-wrapper {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+  
+  table {
+    min-width: 600px;
+  }
+}
+
+/* Grid responsive */
+@media (max-width: 900px) {
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-content {
+    padding: 16px;
+  }
+  
+  .topbar {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .topbar-right {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Search bar button alignment */
+.search-bar .btn {
+  flex-shrink: 0;
+}
+
+/* Card padding responsive */
+@media (max-width: 768px) {
+  .card {
+    padding: 16px;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* Badge status responsive */
+.badge-status {
+  font-size: 10.5px;
+  padding: 3px 10px;
+}
+
+/* Icon sizes */
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+}
+
+/* Navbar badge */
+.nav-badge {
+  font-size: 9px;
+  padding: 1px 6px;
+}
+
+/* Trash tag for dynamic categories */
+.trash-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Print styles for PDF */
+@media print {
+  .sidebar, .topbar, .sidebar-toggle, .sidebar-overlay, .btn, .modal-overlay, .pagination, .search-bar, .card-header .btn {
+    display: none !important;
+  }
+  
+  .main-content, .main-content.expanded {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  .page-content {
+    padding: 0 !important;
+  }
+  
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  
+  .table-wrapper {
+    overflow: visible !important;
+  }
+  
+  table {
+    page-break-inside: auto;
+  }
+  
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  
+  thead {
+    display: table-header-group;
+  }
+  
+  tbody {
+    display: table-row-group;
+  }
+}

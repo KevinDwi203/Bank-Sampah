@@ -1,22 +1,28 @@
-# Dependencies
-node_modules/
-
-# Database file (data lokal, jangan dicommit)
-database/banksampah.db
-database/*.before-*.db
-
-# Environment
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
 .env
-.env.local
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
 *.log
-npm-debug.log*
-
-# Editor
-.vscode/
-*.swp
+*.db
+*.sqlite
+/database/*.zip
+/storage/framework/cache/*
+!/storage/framework/cache/.gitignore
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+/storage/logs/*
+!/storage/logs/.gitignore

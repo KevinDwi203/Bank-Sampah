@@ -1,0 +1,9 @@
+node_modules
+vendor
+.git
+.env
+.env.backup
+.env.production
+*.db
+*.sqlite
+database/*.zip

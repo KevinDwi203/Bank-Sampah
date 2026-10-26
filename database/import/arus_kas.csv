@@ -1,0 +1,12 @@
+id_sumber,tanggal,keterangan,masuk,keluar,kategori,saldo,catatan
+KAS-01,2026-06-09,Bayar hasil timbangan 7 Juni (Transfer),72000,0,lainnya,72000,
+KAS-02,2026-06-14,Pak Oleh dibayar cash (Besi 2 11kg),0,30000,pengeluaran_operasional,42000,Kolom keluar: Bayar ditempat
+KAS-03,2026-06-14,Bu Adam dibayar cash (Buku Campur 10kg),0,10000,pengeluaran_operasional,32000,Kolom keluar: Bayar ditempat
+KAS-04,2026-06-14,Beli Cuter 2pcs,0,10000,pembelian_peralatan,22000,Kolom keluar: Pengurus
+KAS-05,2026-06-16,Bayar hasil timbangan 14 Juni (Transfer),110000,0,lainnya,132000,
+KAS-06,2026-06-21,Mamah Meimei (Bunda) dibayar cash (Kardus 6kg),0,6000,pengeluaran_operasional,126000,Kolom keluar: Bayar ditempat
+KAS-07,2026-06-21,Beli Tali Rapia Besar 1pcs,0,18000,pembelian_peralatan,108000,Kolom keluar: Pengurus
+KAS-08,2026-06-28,Bu Wahyu G2 dibayar cash (Kardus 40kg),0,52000,pengeluaran_operasional,56000,Kolom keluar: Bayar ditempat
+KAS-09,2026-06-28,Bu Haji Ade dibayar cash (Kardus 16kg),0,21000,pengeluaran_operasional,35000,Kolom keluar: Bayar ditempat
+KAS-10,2026-06-28,Beli Konsumsi air mineral,0,4000,biaya_konsumsi,31000,Kolom keluar: Pengurus
+KAS-11,2026-07-09,Bayar hasil timbangan 21 & 28 Juli (Transfer),360000,0,lainnya,391000,
