@@ -9,6 +9,9 @@ sed -i "s/<VirtualHost \*:[0-9]*>/<VirtualHost \*:${PORT}>/g" /etc/apache2/sites
 # Link storage if not already linked
 php artisan storage:link || true
 
+# Bersihkan cache bootstrap lama jika ada
+rm -f /var/www/html/bootstrap/cache/*.php || true
+
 # Discover packages at runtime
 php artisan package:discover --ansi || true
 
