@@ -14,6 +14,24 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArusKasController;
 use App\Http\Controllers\AkunSayaController;
 
+// Setup & Migrasi helper (tanpa perlu SSH/Shell)
+Route::get('/run-migrate-setup', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        return '<div style="font-family:sans-serif;padding:30px;text-align:center;">
+            <h1 style="color:#10b981;">✅ Sukses!</h1>
+            <p style="font-size:16px;">Database berhasil di-migrate dan di-seed dengan data awal.</p>
+            <p><a href="/login" style="display:inline-block;padding:10px 20px;background:#10b981;color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;">Pergi ke Halaman Login</a></p>
+        </div>';
+    } catch (\Throwable $e) {
+        return '<div style="font-family:sans-serif;padding:30px;color:#ef4444;">
+            <h1>❌ Gagal Menjalankan Migrasi</h1>
+            <p>' . htmlspecialchars($e->getMessage()) . '</p>
+        </div>';
+    }
+});
+
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);

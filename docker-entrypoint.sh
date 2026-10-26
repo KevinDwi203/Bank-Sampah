@@ -12,6 +12,12 @@ php artisan storage:link || true
 # Discover packages at runtime
 php artisan package:discover --ansi || true
 
+# Jalankan migrasi & seeder secara otomatis saat server menyala
+if [ -n "$DB_HOST" ]; then
+    echo "Menjalankan migrasi dan seeding database..."
+    php artisan migrate --seed --force || true
+fi
+
 # Clear/optimize cache if APP_KEY is provided
 if [ -n "$APP_KEY" ]; then
     php artisan config:cache || true
