@@ -1,15 +1,19 @@
 FROM php:8.2-apache
 
-# Install dependencies sistem & ekstensi PHP
+# Install dependencies sistem & ekstensi PHP yang dibutuhkan Laravel
 RUN apt-get update && apt-get install -y \
     libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    libzip-dev \
     libonig-dev \
     libxml2-dev \
     zip \
     unzip \
     git \
     curl \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js & npm (untuk Vite build)
@@ -43,7 +47,7 @@ RUN mkdir -p \
     bootstrap/cache
 
 # Install dependencies PHP (Composer) & Node (npm)
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 RUN npm install && npm run build
 
 # Set permissions
