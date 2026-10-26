@@ -15,7 +15,11 @@ return new class extends Migration
         foreach (explode('$$', $sql) as $statement) {
             $statement = trim($statement);
             if ($statement !== '') {
-                DB::unprepared($statement);
+                try {
+                    DB::unprepared($statement);
+                } catch (\Throwable $e) {
+                    logger()->warning("Trigger/statement skipped: " . $e->getMessage());
+                }
             }
         }
     }

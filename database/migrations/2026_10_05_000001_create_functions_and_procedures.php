@@ -23,8 +23,11 @@ return new class extends Migration
                 if ($part === '') {
                     continue;
                 }
-                // DROP ... ; yang berdiri sendiri sudah terpisah, CREATE berakhir di END
-                DB::unprepared($part);
+                try {
+                    DB::unprepared($part);
+                } catch (\Throwable $e) {
+                    logger()->warning("Stored procedure/function skipped: " . $e->getMessage());
+                }
             }
         }
     }
