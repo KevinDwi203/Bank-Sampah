@@ -124,6 +124,20 @@
                 </button>
             </form>
 
+            <div style="margin-top: 18px; padding: 12px 14px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; font-size: 12px; color: #64748b;">
+                <div style="font-weight: 600; color: #334155; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                    <span>🧪</span> Akun Pengujian (1-Klik untuk Guru):
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" onclick="quickLogin('testadmin', 'admin123')" style="cursor: pointer; background: #e0f2fe; border: 1px solid #bae6fd; color: #0369a1; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600;">
+                        Admin Dummy (testadmin)
+                    </button>
+                    <button type="button" onclick="quickLogin('testpetugas', 'petugas123')" style="cursor: pointer; background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600;">
+                        Petugas Dummy (testpetugas)
+                    </button>
+                </div>
+            </div>
+
             
 
             <div class="login-footer">

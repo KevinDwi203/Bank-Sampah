@@ -20,7 +20,7 @@ if [ -n "$DB_HOST" ]; then
     echo "Menjalankan migrasi database..."
     php artisan migrate --force || true
     echo "Mengimpor data nasabah, transaksi, dan arus kas..."
-    php artisan banksampah:import-csv database/import --replace-demo-data --force || true
+    php artisan banksampah:import-csv database/import --force || true
     echo "Menjalankan seeder akun pengguna..."
     php artisan db:seed --force || true
 fi

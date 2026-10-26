@@ -5,15 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Traits\HasDummyScope;
 
 class Nasabah extends Model
 {
-    use HasFactory;
+    use HasFactory, HasDummyScope;
 
     protected $table = 'nasabah';
 
     protected $fillable = [
         'kode',
+        'nomor_kartu',
         'nama',
         'telepon',
         'alamat',
@@ -21,6 +24,7 @@ class Nasabah extends Model
         'poin',
         'status',
         'last_deposit_at',
+        'is_dummy',
     ];
 
     protected function casts(): array
@@ -29,7 +33,13 @@ class Nasabah extends Model
             'saldo' => 'decimal:2',
             'poin' => 'integer',
             'last_deposit_at' => 'date',
+            'is_dummy' => 'boolean',
         ];
+    }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class);
     }
 
     public function transaksi(): HasMany

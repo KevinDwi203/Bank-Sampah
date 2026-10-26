@@ -4,6 +4,23 @@
 @section('pageTitle', 'Dashboard')
 
 @section('content')
+    @if (auth()->user()->is_dummy)
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>
+                <div style="font-weight: 700; color: #1e40af; font-size: 15px; display: flex; align-items: center; gap: 8px;">
+                    <span>🧪</span> Ruang Pengujian Guru (Akun Dummy: {{ auth()->user()->username }})
+                </div>
+                <div style="font-size: 13px; color: #3b82f6; margin-top: 4px;">
+                    Data asli operasional aman &amp; tidak disentuh. Silakan uji tambah nasabah, transaksi setor sampah, dan login sebagai nasabah baru.
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <a href="{{ route('nasabah.create') }}" class="btn btn-primary" style="font-size: 13px; padding: 8px 14px;">➕ Tambah Nasabah</a>
+                <a href="{{ route('dummy.reset') }}" class="btn btn-outline" style="font-size: 13px; padding: 8px 14px; background: #fff; color: #dc2626; border-color: #fca5a5;" onclick="return confirm('Bersihkan semua data pengujian dummy kembali ke awal (kosong)?')">🔄 Reset Data Pengujian</a>
+            </div>
+        </div>
+    @endif
+
     <!-- STAT CARDS -->
     <div class="stats-grid">
         <div class="stat-card blue">

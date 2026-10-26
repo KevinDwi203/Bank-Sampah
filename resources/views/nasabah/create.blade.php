@@ -69,6 +69,31 @@
                 </div>
             </div>
 
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; margin-top: 16px;">
+                <div style="font-weight: 600; color: #166534; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <span>🔐</span> Akun Login Nasabah (Otomatis Dibuat)
+                </div>
+                <p style="font-size: 12.5px; color: #15803d; margin: 0 0 12px 0;">
+                    Akun nasabah otomatis dibuat agar nasabah dapat login ke menu <strong>Akun Saya</strong>. Anda dapat menggunakan username/password default di bawah ini atau mengubahnya.
+                </p>
+                <div class="grid-2">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 12px; color: #166534;">Username Login</label>
+                        <input type="text" class="form-control" name="username" placeholder="{{ $defaultUsername }}" value="{{ old('username', $defaultUsername) }}" style="background: #fff;">
+                        @error('username')
+                            <span class="error-text">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 12px; color: #166534;">Password Login</label>
+                        <input type="text" class="form-control" name="password" placeholder="nasabah123" value="{{ old('password', 'nasabah123') }}" style="background: #fff;">
+                        @error('password')
+                            <span class="error-text">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
             <div class="modal-footer" style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border);">
                 <a href="{{ route('nasabah.index') }}" class="btn btn-outline">Batal</a>
                 <button type="submit" class="btn btn-primary">💾 Simpan</button>

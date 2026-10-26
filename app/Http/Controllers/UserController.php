@@ -9,7 +9,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id')->paginate(20);
+        $isDummy = auth()->check() ? (bool) auth()->user()->is_dummy : false;
+        $users = User::where('is_dummy', $isDummy)->orderBy('id')->paginate(20);
         return view('users.index', compact('users'));
     }
 
@@ -34,6 +35,7 @@ class UserController extends Controller
             'password' => $request->password,
             'role' => $request->role,
             'aktif' => $request->boolean('aktif'),
+            'is_dummy' => auth()->check() ? (bool) auth()->user()->is_dummy : false,
         ]);
 
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan');

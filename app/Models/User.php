@@ -19,6 +19,7 @@ class User extends Authenticatable
         'telepon',
         'role',
         'aktif',
+        'is_dummy',
         'nasabah_id'
     ];
 
@@ -31,6 +32,7 @@ class User extends Authenticatable
     {
         return [
             'aktif' => 'boolean',
+            'is_dummy' => 'boolean',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];

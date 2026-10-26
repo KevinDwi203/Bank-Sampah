@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Traits\HasDummyScope;
 
 class ArusKas extends Model
 {
-    use HasFactory;
+    use HasFactory, HasDummyScope;
 
     protected $table = 'arus_kas';
 
@@ -21,6 +22,7 @@ class ArusKas extends Model
         'saldo',
         'catatan',
         'user_id',
+        'is_dummy',
     ];
 
     protected function casts(): array
@@ -30,6 +32,7 @@ class ArusKas extends Model
             'masuk' => 'decimal:2',
             'keluar' => 'decimal:2',
             'saldo' => 'decimal:2',
+            'is_dummy' => 'boolean',
         ];
     }
 

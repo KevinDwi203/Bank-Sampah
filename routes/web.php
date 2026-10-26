@@ -28,8 +28,8 @@ Route::get('/run-migrate-setup', function () {
         $output = \Illuminate\Support\Facades\Artisan::output();
 
         return '<div style="font-family:sans-serif;padding:30px;max-width:650px;margin:30px auto;border:1px solid #10b981;border-radius:12px;background:#f0fdf4;">
-            <h1 style="color:#059669;">✅ Data Berhasil Diimpor!</h1>
-            <p style="font-size:16px;color:#374151;">Semua data nasabah (22 orang), transaksi setoran (133 transaksi), dan laporan kas asli berhasil dimasukkan ke TiDB Cloud.</p>
+            <h1 style="color:#059669;">✅ Data Berhasil Diimpor & Disinkronkan!</h1>
+            <p style="font-size:16px;color:#374151;">Semua data nasabah (22 orang), transaksi setoran (133 transaksi), dan akun dummy pengujian (testadmin, testpetugas) berhasil disiapkan di TiDB Cloud.</p>
             <pre style="background:#fff;padding:12px;border-radius:8px;font-size:13px;border:1px solid #d1fae5;color:#065f46;">' . htmlspecialchars($output) . '</pre>
             <p style="margin-top:20px;"><a href="/dashboard" style="display:inline-block;padding:10px 20px;background:#059669;color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;">Masuk ke Dashboard</a></p>
         </div>';
@@ -40,6 +40,21 @@ Route::get('/run-migrate-setup', function () {
         </div>';
     }
 });
+
+// Reset data dummy pengujian (hanya data dummy, data asli tetap aman)
+Route::get('/reset-dummy-data', function () {
+    if (!auth()->check() || !auth()->user()->is_dummy) {
+        return redirect()->route('login')->with('error', 'Hanya dapat diakses saat login dengan akun dummy.');
+    }
+    
+    \App\Models\Transaksi::withoutGlobalScopes()->where('is_dummy', true)->delete();
+    \App\Models\Penarikan::withoutGlobalScopes()->where('is_dummy', true)->delete();
+    \App\Models\ArusKas::withoutGlobalScopes()->where('is_dummy', true)->delete();
+    \App\Models\User::where('is_dummy', true)->where('role', 'Nasabah')->delete();
+    \App\Models\Nasabah::withoutGlobalScopes()->where('is_dummy', true)->delete();
+    
+    return redirect()->route('dashboard')->with('success', 'Data pengujian dummy berhasil dibersihkan kembali ke kosong (bersih).');
+})->name('dummy.reset');
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

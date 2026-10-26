@@ -25,9 +25,12 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $users = [
-            ['username' => 'admin', 'nama' => 'Admin Utama', 'role' => 'Administrator', 'password' => 'admin123'],
-            ['username' => 'petugas', 'nama' => 'Budi Santoso', 'role' => 'Petugas', 'password' => 'petugas123'],
-            ['username' => 'nasabah', 'nama' => 'Siti Rahayu', 'role' => 'Nasabah', 'password' => 'nasabah123'],
+            ['username' => 'admin', 'nama' => 'Admin Utama', 'role' => 'Administrator', 'password' => 'admin123', 'is_dummy' => false],
+            ['username' => 'petugas', 'nama' => 'Budi Santoso', 'role' => 'Petugas', 'password' => 'petugas123', 'is_dummy' => false],
+            ['username' => 'nasabah', 'nama' => 'Siti Rahayu', 'role' => 'Nasabah', 'password' => 'nasabah123', 'is_dummy' => false],
+            // Akun Dummy untuk Pengujian Guru
+            ['username' => 'testadmin', 'nama' => 'Admin Penguji (Dummy)', 'role' => 'Administrator', 'password' => 'admin123', 'is_dummy' => true],
+            ['username' => 'testpetugas', 'nama' => 'Petugas Penguji (Dummy)', 'role' => 'Petugas', 'password' => 'petugas123', 'is_dummy' => true],
         ];
 
         foreach ($users as $userData) {
@@ -38,6 +41,7 @@ class UserSeeder extends Seeder
                     'role' => $userData['role'],
                     'password' => $userData['password'],
                     'aktif' => true,
+                    'is_dummy' => $userData['is_dummy'],
                 ]
             );
         }
@@ -68,7 +72,8 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($nasabahAccounts as $acc) {
-            $nasabah = Nasabah::where('nomor_kartu', $acc['card'])
+            $nasabah = Nasabah::withoutGlobalScopes()
+                ->where('nomor_kartu', $acc['card'])
                 ->orWhere('kode', 'like', "%{$acc['card']}")
                 ->first();
 
@@ -79,6 +84,7 @@ class UserSeeder extends Seeder
                     'role' => 'Nasabah',
                     'password' => $acc['password'],
                     'aktif' => true,
+                    'is_dummy' => false,
                     'nasabah_id' => $nasabah?->id,
                 ]
             );

@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Traits\HasDummyScope;
 
 class Transaksi extends Model
 {
-    use HasFactory;
+    use HasFactory, HasDummyScope;
 
     protected $table = 'transaksi';
 
@@ -24,6 +25,7 @@ class Transaksi extends Model
         'catatan',
         'status',
         'tanggal',
+        'is_dummy',
     ];
 
     protected function casts(): array
@@ -35,6 +37,7 @@ class Transaksi extends Model
             'total' => 'decimal:2',
             'poin_dapat' => 'integer',
             'tanggal' => 'date',
+            'is_dummy' => 'boolean',
         ];
     }
 
