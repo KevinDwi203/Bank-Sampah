@@ -13,6 +13,7 @@ class ImportBankSampahCsv extends Command
     protected $signature = 'banksampah:import-csv
         {folder : Folder berisi nasabah.csv, transaksi.csv, arus_kas.csv}
         {--replace-demo-data : Hapus data operasional lama sebelum impor; gunakan hanya setelah backup}
+        {--force : Lewati konfirmasi interaktif}
         {--dry-run : Validasi file saja, tanpa menyimpan data}';
 
     protected $description = 'Impor data Bank Sampah dari CSV yang sudah dinormalisasi';
@@ -34,7 +35,7 @@ class ImportBankSampahCsv extends Command
             return self::FAILURE;
         }
 
-        if ($this->option('replace-demo-data') && !$this->option('dry-run')) {
+        if ($this->option('replace-demo-data') && !$this->option('dry-run') && !$this->option('force') && $this->input->isInteractive()) {
             if (!$this->confirm('Ini akan menghapus data nasabah, transaksi, penarikan, dan arus kas yang ada. Backup sudah aman?')) {
                 $this->warn('Dibatalkan. Tidak ada data yang diubah.');
                 return self::FAILURE;

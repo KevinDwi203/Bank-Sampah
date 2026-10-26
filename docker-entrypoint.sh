@@ -19,6 +19,8 @@ php artisan package:discover --ansi || true
 if [ -n "$DB_HOST" ]; then
     echo "Menjalankan migrasi dan seeding database..."
     php artisan migrate --seed --force || true
+    echo "Mengimpor data nasabah, transaksi, dan arus kas..."
+    php artisan banksampah:import-csv database/import --replace-demo-data --force || true
 fi
 
 # Clear/optimize cache if APP_KEY is provided

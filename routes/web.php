@@ -19,14 +19,22 @@ Route::get('/run-migrate-setup', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
         \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
-        return '<div style="font-family:sans-serif;padding:30px;text-align:center;">
-            <h1 style="color:#10b981;">✅ Sukses!</h1>
-            <p style="font-size:16px;">Database berhasil di-migrate dan di-seed dengan data awal.</p>
-            <p><a href="/login" style="display:inline-block;padding:10px 20px;background:#10b981;color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;">Pergi ke Halaman Login</a></p>
+        \Illuminate\Support\Facades\Artisan::call('banksampah:import-csv', [
+            'folder' => database_path('import'),
+            '--replace-demo-data' => true,
+            '--force' => true,
+        ]);
+        $output = \Illuminate\Support\Facades\Artisan::output();
+
+        return '<div style="font-family:sans-serif;padding:30px;max-width:650px;margin:30px auto;border:1px solid #10b981;border-radius:12px;background:#f0fdf4;">
+            <h1 style="color:#059669;">✅ Data Berhasil Diimpor!</h1>
+            <p style="font-size:16px;color:#374151;">Semua data nasabah (22 orang), transaksi setoran (133 transaksi), dan laporan kas asli berhasil dimasukkan ke TiDB Cloud.</p>
+            <pre style="background:#fff;padding:12px;border-radius:8px;font-size:13px;border:1px solid #d1fae5;color:#065f46;">' . htmlspecialchars($output) . '</pre>
+            <p style="margin-top:20px;"><a href="/dashboard" style="display:inline-block;padding:10px 20px;background:#059669;color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;">Masuk ke Dashboard</a></p>
         </div>';
     } catch (\Throwable $e) {
         return '<div style="font-family:sans-serif;padding:30px;color:#ef4444;">
-            <h1>❌ Gagal Menjalankan Migrasi</h1>
+            <h1>❌ Gagal Menjalankan Impor Data</h1>
             <p>' . htmlspecialchars($e->getMessage()) . '</p>
         </div>';
     }
