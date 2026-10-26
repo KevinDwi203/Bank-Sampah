@@ -46,8 +46,11 @@ RUN mkdir -p \
     storage/logs \
     bootstrap/cache
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_MEMORY_LIMIT=-1
+
 # Install dependencies PHP (Composer) & Node (npm)
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+RUN composer install --ignore-platform-reqs --no-dev --optimize-autoloader --no-interaction --no-scripts
 RUN npm install && npm run build
 
 # Set permissions
