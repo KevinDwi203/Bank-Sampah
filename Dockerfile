@@ -21,13 +21,15 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Aktifkan mod_rewrite Apache
+# Aktifkan mod_rewrite Apache & AllowOverride All
 RUN a2enmod rewrite
 
-# Konfigurasi Apache DocumentRoot ke folder public Laravel
+# Konfigurasi Apache DocumentRoot & AllowOverride untuk Laravel
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+RUN sed -i '/<\/VirtualHost>/i <Directory /var/www/html/public>\nOptions Indexes FollowSymLinks\nAllowOverride All\nRequire all granted\n</Directory>' /etc/apache2/sites-available/000-default.conf
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
