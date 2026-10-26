@@ -20,7 +20,7 @@
                 <div><span style="color:var(--text-muted); font-size:11px;">TELEPON</span><br><strong>{{ $nasabah->telepon ?? '—' }}</strong></div>
                 <div><span style="color:var(--text-muted); font-size:11px;">SALDO TABUNGAN</span><br><strong style="color:var(--primary); font-size:16px;">{{ formatRupiah($nasabah->saldo) }}</strong></div>
                 <div><span style="color:var(--text-muted); font-size:11px;">POIN</span><br><strong>{{ $nasabah->poin }} poin</strong></div>
-                <div><span style="color:var(--text-muted); font-size:11px;">AKUN LOGIN USER</span><br><strong style="color:#059669;"><code>{{ $nasabah->user->username ?? 'Belum ada akun' }}</code></strong></div>
+                <div><span style="color:var(--text-muted); font-size:11px;">USERNAME</span><br><strong>{{ $nasabah->user->username ?? '—' }}</strong></div>
                 <div style="grid-column:span 2;"><span style="color:var(--text-muted); font-size:11px;">ALAMAT</span><br><strong>{{ $nasabah->alamat ?? '—' }}</strong></div>
                 <div><span style="color:var(--text-muted); font-size:11px;">TOTAL TRANSAKSI</span><br><strong>{{ $transaksiCount }} kali</strong></div>
                 <div><span style="color:var(--text-muted); font-size:11px;">TOTAL SETORAN</span><br><strong style="color:var(--primary);">{{ formatRupiah($transaksiTotal) }}</strong></div>

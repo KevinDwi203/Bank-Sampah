@@ -66,12 +66,7 @@
                             <td>
                                 <div style="display:flex; align-items:center; gap:10px;">
                                     <div style="width:36px; height:36px; background:#e8f5e9; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px;">👤</div>
-                                    <div>
-                                        <strong>{{ $n->nama }}</strong>
-                                        @if ($n->user)
-                                            <div style="font-size:11.5px; color:#059669;">User: <code>{{ $n->user->username }}</code></div>
-                                        @endif
-                                    </div>
+                                    <strong>{{ $n->nama }}</strong>
                                 </div>
                             </td>
                             <td>{{ $n->telepon ?? '—' }}</td>

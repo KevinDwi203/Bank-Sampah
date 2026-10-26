@@ -28,9 +28,9 @@ class UserSeeder extends Seeder
             ['username' => 'admin', 'nama' => 'Admin Utama', 'role' => 'Administrator', 'password' => 'admin123', 'is_dummy' => false],
             ['username' => 'petugas', 'nama' => 'Budi Santoso', 'role' => 'Petugas', 'password' => 'petugas123', 'is_dummy' => false],
             ['username' => 'nasabah', 'nama' => 'Siti Rahayu', 'role' => 'Nasabah', 'password' => 'nasabah123', 'is_dummy' => false],
-            // Akun Dummy untuk Pengujian Guru
-            ['username' => 'testadmin', 'nama' => 'Admin Penguji (Dummy)', 'role' => 'Administrator', 'password' => 'admin123', 'is_dummy' => true],
-            ['username' => 'testpetugas', 'nama' => 'Petugas Penguji (Dummy)', 'role' => 'Petugas', 'password' => 'petugas123', 'is_dummy' => true],
+            // Akun Pengujian
+            ['username' => 'testadmin', 'nama' => 'Admin Penguji', 'role' => 'Administrator', 'password' => 'admin123', 'is_dummy' => true],
+            ['username' => 'testpetugas', 'nama' => 'Petugas Penguji', 'role' => 'Petugas', 'password' => 'petugas123', 'is_dummy' => true],
         ];
 
         foreach ($users as $userData) {

@@ -29,7 +29,7 @@ Route::get('/run-migrate-setup', function () {
 
         return '<div style="font-family:sans-serif;padding:30px;max-width:650px;margin:30px auto;border:1px solid #10b981;border-radius:12px;background:#f0fdf4;">
             <h1 style="color:#059669;">✅ Data Berhasil Diimpor & Disinkronkan!</h1>
-            <p style="font-size:16px;color:#374151;">Semua data nasabah (22 orang), transaksi setoran (133 transaksi), dan akun dummy pengujian (testadmin, testpetugas) berhasil disiapkan di TiDB Cloud.</p>
+            <p style="font-size:16px;color:#374151;">Semua data nasabah (22 orang), transaksi setoran (133 transaksi), dan akun pengujian (testadmin, testpetugas) berhasil disiapkan di TiDB Cloud.</p>
             <pre style="background:#fff;padding:12px;border-radius:8px;font-size:13px;border:1px solid #d1fae5;color:#065f46;">' . htmlspecialchars($output) . '</pre>
             <p style="margin-top:20px;"><a href="/dashboard" style="display:inline-block;padding:10px 20px;background:#059669;color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;">Masuk ke Dashboard</a></p>
         </div>';
