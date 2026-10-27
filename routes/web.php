@@ -50,6 +50,7 @@ Route::get('/reset-dummy-data', function () {
     \App\Models\Transaksi::withoutGlobalScopes()->where('is_dummy', true)->delete();
     \App\Models\Penarikan::withoutGlobalScopes()->where('is_dummy', true)->delete();
     \App\Models\ArusKas::withoutGlobalScopes()->where('is_dummy', true)->delete();
+    \App\Models\Laporan::withoutGlobalScopes()->where('is_dummy', true)->delete();
     \App\Models\User::where('is_dummy', true)->where('role', 'Nasabah')->delete();
     \App\Models\Nasabah::withoutGlobalScopes()->where('is_dummy', true)->delete();
     
@@ -112,14 +113,8 @@ Route::middleware('auth')->group(function () {
             ->only(['index', 'show'])
             ->parameters(['tabungan' => 'nasabah']);
 
-        Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
-        Route::get('laporan/mingguan', [LaporanController::class, 'mingguan'])->name('laporan.mingguan');
-        Route::get('laporan/bulanan', [LaporanController::class, 'bulanan'])->name('laporan.bulanan');
-        Route::get('laporan/kiloan', [LaporanController::class, 'kiloan'])->name('laporan.kiloan');
-        Route::get('laporan/pdf/mingguan', [LaporanController::class, 'pdfMingguan'])->name('laporan.pdf.mingguan');
-        Route::get('laporan/pdf/bulanan', [LaporanController::class, 'pdfBulanan'])->name('laporan.pdf.bulanan');
-        Route::get('laporan/pdf/kiloan', [LaporanController::class, 'pdfKiloan'])->name('laporan.pdf.kiloan');
         Route::get('laporan/pdf/rekap', [LaporanController::class, 'pdfRekap'])->name('laporan.pdf.rekap');
+        Route::resource('laporan', LaporanController::class);
 
         Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
         Route::post('setting', [SettingController::class, 'update'])->name('setting.update');
